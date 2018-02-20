@@ -14,7 +14,20 @@ http://docs.docker.com/v1.8/installation/
 
     git clone https://github.com/agile-iot/Practical-Cryptdb_Docker.git
 
-##### 3. Build docker image
+##### 3. Make changes to the environment variables, such that the username and password for cryptdb is set and the location of the backend database is specified
+
+    ENV CRYPTDB_PASS=**PASSWORD**
+    ENV CRYPTDB_USER=**USERNAME**
+    ENV BACKEND_ADDRESS=**IP**
+    ENV BACKEND_PORT=**PORT**
+
+    #Example
+    ENV CRYPTDB_PASS=root
+    ENV CRYPTDB_USER=root
+    ENV BACKEND_ADDRESS=11.22.33.44
+    ENV BACKEND_PORT=3306
+
+##### 4. Build docker image
 
     sudo docker build -t **name-of-image**:**version** **.**
 
@@ -26,7 +39,7 @@ http://docs.docker.com/v1.8/installation/
 
 (Open the Docker Quickstart Terminal if OS X or Windows)
 
-##### 4. Run docker container based built image
+##### 5. Run docker container based built image
 
     sudo docker run -d --name **name-of-container** -p **port-in**:3399 **name-of-image**:**version**
 

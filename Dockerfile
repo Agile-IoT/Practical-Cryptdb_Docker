@@ -20,8 +20,7 @@ RUN echo "mysql-server mysql-server/root_password password $CRYPTDB_PASS" | debc
 RUN echo "mysql-server mysql-server/root_password_again password $CRYPTDB_PASS" | debconf-set-selections
 
 # Clone project repository
-#RUN git clone https://github.com/firsti/Practical-Cryptdb.git /opt/cryptdb
-COPY Practical-Cryptdb /opt/cryptdb/
+RUN git clone https://github.com/yiwenshao/Practical-Cryptdb.git /opt/cryptdb
 WORKDIR /opt/cryptdb
 
 # Adding debian compatibility to apt syntax
