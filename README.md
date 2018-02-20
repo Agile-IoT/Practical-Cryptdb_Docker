@@ -12,7 +12,7 @@ http://docs.docker.com/v1.8/installation/
 
 ##### 2. Create a folder, clone project and navigate to folder containing the Dockerfile
 
-    git clone https://github.com/agribu/Practical-Cryptdb_Docker.git
+    git clone https://github.com/agile-iot/Practical-Cryptdb_Docker.git
 
 ##### 3. Build docker image
 
@@ -28,25 +28,9 @@ http://docs.docker.com/v1.8/installation/
 
 ##### 4. Run docker container based built image
 
-    sudo docker run -d --name **name-of-container** -p **port-in**:**port-out** -p **port-in**:**port-out** -e MYSQL_ROOT_PASSWORD='letmein' **name-of-image**:**version**
+    sudo docker run -d --name **name-of-container** -p **port-in**:3399 **name-of-image**:**version**
 
     #Example:
-    sudo docker run -d --name cryptdb_v1 -p 3306:3306 -p 3399:3399 -e MYSQL_ROOT_PASSWORD='letmein' cryptdb:v1
+    sudo docker run -d --name cryptdb_v1 -p 3399:3399 cryptdb:v1
 
-(Important: The password must be 'letmein')
-
-##### 5. For accessing a docker container, use
-
-    sudo docker exec -it **name-of-container** bash
-
-    #Example:
-    sudo docker exec -it cryptdb_v1 bash
-
-
-
-## How to play around:
-
-```
-./cdbserver.sh
-./cdbclient.sh
-```
+Cryptdb server will start automatically and is accessible through the spcified **port-in**
