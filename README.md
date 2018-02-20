@@ -33,4 +33,4 @@ http://docs.docker.com/v1.8/installation/
     #Example:
     sudo docker run -d --name cryptdb_v1 -p 3399:3399 cryptdb:v1
 
-Cryptdb server will start automatically and is accessible through the spcified **port-in**
+Cryptdb server will start automatically and is accessible through the specified **port-in**
