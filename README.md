@@ -25,7 +25,7 @@ http://docs.docker.com/v1.8/installation/
     #Example
     ENV CRYPTDB_PASS=root
     ENV CRYPTDB_USER=root
-    ENV BACKEND_ADDRESS=11.22.33.44
+    ENV BACKEND_ADDRESS=agile-cryptdb-backend
     ENV BACKEND_PORT=3306
 
 ##### 4. Build docker image
@@ -48,3 +48,29 @@ http://docs.docker.com/v1.8/installation/
     sudo docker run -d --name cryptdb_v1 -p 3399:3399 cryptdb:v1
 
 Cryptdb server will start automatically and is accessible through the specified **port-in**
+
+### To use CryptDB in a stack, add the following to docker-compose.yml
+
+    agile-cryptdb:
+      container_name: agile-cryptdb
+      hostname: agile-cryptdb
+      image: agileiot/Practical-Cryptdb_Docker
+      restart: always
+      depends_on:
+        - agile-cryptdb-backend
+      ports:
+        - 3399:3399/tcp
+
+    agile-cryptdb-backend:
+      container_name: agile-cryptdb-backend
+      hostname: agile-cryptdb-backend
+      image: agileiot/agile-cryptdb-backend
+      restart: always
+      ports:
+        - 3306:3306/tcp
+      environment:
+        MYSQL_ROOT_PASSWORD: root
+      volumes:
+        - $DATA/agile-cryptdb-backend:/var/lib/mysql
+
+This will start both, the MySQL backend with the CryptDB libraries and the CryptDB proxy. It is possible to run the two components on different devices. 
