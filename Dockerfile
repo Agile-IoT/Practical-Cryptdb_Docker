@@ -10,7 +10,7 @@ RUN apt-get install -y ca-certificates sudo ruby git less net-tools
 
 ENV CRYPTDB_PASS=root
 ENV CRYPTDB_USER=root
-ENV BACKEND_ADDRESS=11.22.33.44
+ENV BACKEND_ADDRESS=agile-cryptdb-backend
 ENV BACKEND_PORT=3306
 
 RUN echo 'root:root' |chpasswd
@@ -35,5 +35,5 @@ RUN sed -i -e"s/^proxy-backen-addresses\s*=\s*127.0.0.1:3306/proxy-backend-addre
 RUN sed -i -e"s#mysql-proxy #mysql-src/mysql-proxy-0.8.5/bin/mysql-proxy #g" cdbserver.sh
 CMD ["/bin/bash", "-c", "/opt/cryptdb/cdbserver.sh"]
 
-# Expose only cryptdb port
+# Expose cryptdb port
 EXPOSE 3399
