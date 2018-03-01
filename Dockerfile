@@ -10,8 +10,6 @@ RUN apt-get install -y ca-certificates sudo ruby git less net-tools
 
 ENV CRYPTDB_PASS=root
 ENV CRYPTDB_USER=root
-ENV BACKEND_ADDRESS=agile-cryptdb-backend
-ENV BACKEND_PORT=3306
 
 RUN echo 'root:root' |chpasswd
 
@@ -28,6 +26,9 @@ RUN sed -i 's/apt /apt-get /g' INSTALL.sh
 
 # Setup
 RUN ./INSTALL.sh
+
+ENV BACKEND_ADDRESS=agile-cryptdb-backend
+ENV BACKEND_PORT=3307
 
 # Change variables such that cryptdb starts automatically, it is accessible from outside and according to environment variables
 RUN sed -i -e"s/^proxy-address\s*=\s*127.0.0.1:3399/proxy-address = 0.0.0.0:3399/" mysql-proxy.cnf
