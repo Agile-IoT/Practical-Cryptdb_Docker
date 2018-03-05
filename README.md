@@ -74,4 +74,28 @@ Cryptdb server will start automatically and is accessible through the specified 
       volumes:
         - $DATA/agile-cryptdb-backend:/var/lib/mysql
 
-This will start both, the MySQL backend with the CryptDB libraries and the CryptDB proxy. It is possible to run the two components on different devices. 
+This will start both, the MySQL backend with the CryptDB libraries and the CryptDB proxy. It is possible to run the two components on different devices.
+
+## Troubleshooting
+### 1. Error when trying the use an existing database or table
+    
+    MySQL [NULL]> use mysql
+    Database changed
+    MySQL [mysql]> show tables;
+    ERROR 4095 (fail1): (main/dml_handler.cc, 1684)
+    failed to find the database 'mysql'
+    
+This means you are trying to use a database or tables that were not generated through the CryptDB proxy.
+### 2. I am seeing this error in the logs:
+
+    agile-cryptdb | mysql-proxy: main/rewrite_main.cc:163: bool tablesSanityCheck(SchemaInfo&, const std::unique_ptr<Connect>&, const std::unique_ptr<Connect>&): Assertion `meta_tables.size() == anon_name_map.size()' failed.
+    agile-cryptdb | /opt/cryptdb/cdbserver.sh: line 2: 10 Aborted mysql-src/mysql-proxy-0.8.5/bin/mysql-proxy --defaults-file=./mysql-proxy.cnf --proxy-lua-script=`pwd`/wrapper.lua
+
+This is a serious error. It means the proxy had a fatal error, e.g. the database was corrupted. We encountered this when trying to create a table that already exists together with <code>IF NOT EXISTS</code> in the query, for example:
+
+    CREATE TABLE IF NOT EXISTS user (ID int AUTO_INCREMENT, User VARCHAR(255), Password VARCHAR(255), PRIMARY KEY(ID));
+
+This also happens, if the already existing table were added through the CryptDB proxy. However, it seems to fail securely when omitting the <code>IF NOT EXISTS</code> part.
+ 
+To recover from this, the database needs to be recreated (<code>DROP/CREATE</code> on the backend database) as well as the CryptDB proxy needs to be removed and started again (<code>docker-compose rm agile-cryptdb && docker-compose up agile-cryptdb</code>).
+
