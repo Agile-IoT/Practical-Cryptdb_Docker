@@ -34,10 +34,10 @@ http://docs.docker.com/v1.8/installation/
     sudo docker build -t **name-of-image**:**version** **.**
 
     #Example:
-    sudo docker build -t cryptdb:v1 .
+    sudo docker build -t agile-cryptdb .
     
     #To build without caching use:
-    sudo docker build --no-cache=true -t cryptdb:v1 .
+    sudo docker build --no-cache=true -t agile-cryptdb .
 
 (Open the Docker Quickstart Terminal if OS X or Windows)
 
@@ -46,7 +46,7 @@ http://docs.docker.com/v1.8/installation/
     sudo docker run -d --name **name-of-container** -p **port-in**:3399 **name-of-image**:**version**
 
     #Example:
-    sudo docker run -d --name cryptdb_v1 -p 3399:3399 cryptdb:v1
+    sudo docker run -d --name agile-cryptdb -p 3399:3399 agile-cryptdb
 
 Cryptdb server will start automatically and is accessible through the specified **port-in**
 
@@ -55,7 +55,7 @@ Cryptdb server will start automatically and is accessible through the specified 
     agile-cryptdb:
       container_name: agile-cryptdb
       hostname: agile-cryptdb
-      image: agileiot/Practical-Cryptdb_Docker
+      image: agile-cryptdb
       restart: always
       depends_on:
         - agile-cryptdb-backend
@@ -65,7 +65,7 @@ Cryptdb server will start automatically and is accessible through the specified 
     agile-cryptdb-backend:
       container_name: agile-cryptdb-backend
       hostname: agile-cryptdb-backend
-      image: agileiot/agile-cryptdb-backend
+      image: agile-cryptdb-backend
       restart: always
       ports:
         - 3306:3306/tcp
@@ -76,6 +76,7 @@ Cryptdb server will start automatically and is accessible through the specified 
 
 This will start both, the MySQL backend with the CryptDB libraries and the CryptDB proxy. It is possible to run the two components on different devices.
 
+**Note:** The instructions to build <code>agile-cryptdb-backend</code> can be found [here](https://github.com/Agile-IoT/agile-cryptdb-backend).
 ## Troubleshooting
 ### 1. Error when trying the use an existing database or table
     
