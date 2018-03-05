@@ -1,5 +1,6 @@
 ##### This project is about investigating the encrypted database [CryptDB](https://css.csail.mit.edu/cryptdb/) developed at MIT in 2011.
-* Currently, the most actively maintained cryptDB repository is located at [yiwenshao/Practical-Cryptdb](https://github.com/yiwenshao/Practical-Cryptdb).
+* This repository uses [agile-cryptdb-backend](https://github.com/Agile-IoT/agile-cryptdb-backend) as the backend MySQL server.
+* CryptDB libraries are required on both the backend and this CryptDB proxy. Therefore, a MySQL server without these libraries as the database will not work.
 * CryptDB currently does not compile on ARM devices.
 * This Dockerfile deploys the project into a runnable docker container base on Ubuntu 16.04.
 
