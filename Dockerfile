@@ -28,7 +28,7 @@ RUN sed -i 's/apt /apt-get /g' INSTALL.sh
 RUN ./INSTALL.sh
 
 ENV BACKEND_ADDRESS=agile-cryptdb-backend
-ENV BACKEND_PORT=3307
+ENV BACKEND_PORT=3306
 
 # Change variables such that cryptdb starts automatically, it is accessible from outside and according to environment variables
 RUN sed -i -e"s/^proxy-address\s*=\s*127.0.0.1:3399/proxy-address = 0.0.0.0:3399/" mysql-proxy.cnf
