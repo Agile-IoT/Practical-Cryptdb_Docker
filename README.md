@@ -86,7 +86,9 @@ This will start both, the MySQL backend with the CryptDB libraries and the Crypt
     ERROR 4095 (fail1): (main/dml_handler.cc, 1684)
     failed to find the database 'mysql'
     
-This means you are trying to use a database or tables that were not generated through the CryptDB proxy.
+This means you are trying to use a database or tables that were not generated through the current CryptDB proxy instance. 
+
+Either the database that you are trying to use was created by a plain MySQL client or another CryptDB proxy instance. This is not possible, since CryptDB uses symmetric encryption and the keys are not known to the current CryptDB instance.
 ### 2. I am seeing this error in the logs:
 
     agile-cryptdb | mysql-proxy: main/rewrite_main.cc:163: bool tablesSanityCheck(SchemaInfo&, const std::unique_ptr<Connect>&, const std::unique_ptr<Connect>&): Assertion `meta_tables.size() == anon_name_map.size()' failed.
