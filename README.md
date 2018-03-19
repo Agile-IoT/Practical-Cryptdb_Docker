@@ -98,7 +98,7 @@ This is a serious error. It means the proxy had a fatal error, e.g. the database
 
     CREATE TABLE IF NOT EXISTS user (ID int AUTO_INCREMENT, User VARCHAR(255), Password VARCHAR(255), PRIMARY KEY(ID));
 
-This also happens, if the already existing table were added through the CryptDB proxy. However, it seems to fail securely when omitting the <code>IF NOT EXISTS</code> part.
+Omitting <code>IF NOT EXISTS</code> lets the proxy fail securely when trying to add a table that already exists, which can be then handled in the application.
  
-To recover from this, the database needs to be recreated (<code>DROP/CREATE</code> on the backend database) as well as the CryptDB proxy needs to be removed and started again (<code>docker-compose rm agile-cryptdb && docker-compose up agile-cryptdb</code>).
+To recover from the error above, the database needs to be recreated (<code>DROP/CREATE</code> on the backend database) as well as the CryptDB proxy needs to be removed and started again (<code>docker-compose rm agile-cryptdb && docker-compose up agile-cryptdb</code>).
 
