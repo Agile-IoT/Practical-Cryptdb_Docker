@@ -14,7 +14,7 @@ http://docs.docker.com/v1.8/installation/
 
 ##### 2. Create a folder, clone project and navigate to folder containing the Dockerfile
 
-    git clone https://github.com/agile-iot/Practical-Cryptdb_Docker.git
+    git clone https://github.com/agile-iot/Practical-Cryptdb_Docker.git agile-cryptdb && cd agile-cryptdb
 
 ##### 3. Make changes to the environment variables, such that the username and password for cryptdb is set and the location of the backend database is specified
 
