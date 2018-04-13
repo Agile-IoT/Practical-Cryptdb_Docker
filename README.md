@@ -55,7 +55,7 @@ Cryptdb server will start automatically and is accessible through the specified 
     agile-cryptdb:
       container_name: agile-cryptdb
       hostname: agile-cryptdb
-      image: agile-cryptdb
+      image: agileiot/agile-cryptdb-$AGILE_ARCH:v0.0.1
       restart: always
       depends_on:
         - agile-cryptdb-backend
@@ -65,7 +65,7 @@ Cryptdb server will start automatically and is accessible through the specified 
     agile-cryptdb-backend:
       container_name: agile-cryptdb-backend
       hostname: agile-cryptdb-backend
-      image: agile-cryptdb-backend
+      image: agileiot/agile-cryptdb-backend-$AGILE_ARCH:v0.0.1
       restart: always
       ports:
         - 3306:3306/tcp
